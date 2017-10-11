@@ -8,6 +8,9 @@ before_install:
   - openssl aes-256-cbc -K $encrypted_a8e0f02164d0_key -iv $encrypted_a8e0f02164d0_iv -in etc/deploy -out ../deploy -d
   - chmod 600 ../deploy
   - eval `ssh-agent -s` && ssh-add ../deploy
+  - openssl aes-256-cbc -K $encrypted_a8e0f02164d0_key -iv $encrypted_a8e0f02164d0_iv -in etc/release -out ../release.asc -d
+  - chmod 600 ../release.asc
+  - gpg --import ../release.asc
 install:
   - rvm use 2.3.1
   - gem install bundler
@@ -18,3 +21,5 @@ git:
 env:
   global:
     - secure: "GOdeMpxds3cyvmG+5vawRitdsUU6f0KV8XYCzX4f8GNDCcr3JflsbZUkjKx+8uVtxpqqzJ+9b407/PKiXLtv/zNVsLjl9lmyuav/SVvLM/avMbH32eiEWscG8xSnxbdOEKTTOTN6RtmOki9ERhI3b3DmIXngdAgNObrPlpmxoHTNOCGqxpF9SbdRAO4OmMXTYzO4FlnmGgHec3FUxv+VeTYbxE+JgcKzVbGbz8Ta5CzLp4yUx5f3mKkI9btxoFAs24MJir7MlP0k/TEg/YcwHEEOKNayIBeUDwmaV+TUgqGKt5PPCv4YyZByQADOT1SFUPSA/Aga8rvL/nQNPC4VFLw6hSdvDpQ4qdCLVk6Lq+y1cD7uCu8+NRd9CS4Hhxv4lHfW8h+NhVXL2hD3zYMalLYCXs/SOdMdcSKYJL+toZ4YMDLouwzdbf9SoHjoK3f6oIPXi3yGCqpPXb2+bT7oq/F1N2ChPfU8aO1hufnpxOmNbir2Xmern622ozmuEeG0jqT5Auwg7HuA6cz1j4ZvC/vitG/PGVegaEXnZ0Phx+sjlGoLBPnQPGMMS0tXNmsIZCaEIQL2x4KleeVJV52TTcRMVHUsaCqBB8hrG0gLC4fkax8HYcjwOEq9Fqay3tB0z/dbR8rflZd3A0FdEU+EmVk6hZUhreXEyxkcfGP3SRA="
+    - secure: "ZSNmW5iMsn64R8VxAgdBQnh/xP45q3lvPdRSEYHPl0wL3wBFJxj8G4Hx3oxXuZY4Ev4tw8RV4xDwRlEtpizD4a6snWq3P0DWkZ6T21jfZn45oHXqvkdXZmtFSoLLT0PSfSCpYAZu9GTuAZeqKLDABymA0ng8lDqR09+9XDWm0Ykh0aNIvm9wzNbifgw/hM03TMuBfrnftLVMYsVR/84uIlvJRrSOHk4Jysvef6tAOPDuf3iJWyTQC38bSdXQQrsyorNbCQQdZEd4C/6p5DNpoG8hgPQF1gVQWEc8hWoVNZ7T+gKByZIqNfvO6IeU5CJVGQLgmGcGUluiNejFiWHRn2Chv95ZE4ShqMAKGxhjlLR/6qPeC/pN69C7kJPQCkjjNnyuKZa5viGh6kcEnjVJ2WcDTqpXZi1uQh4S4wuFZYSPL+Zbah/juzs8RFI/R/wvEC5MF7mf47H4s05ZON+FvQbA4dkw1V8YWPS+9iN037ptC8MU64TcC+4Zmf5mLG34rE7jlc+mKBGoD8GrfNc6eHOsEawT7p+JvpVGZzKQxJjx4C4kpTTUm/dOidRrXTdjETlyE6h5XOyHkfGMlwLd2oupxCrv9RgQVG3jhYNDTOKdJednghTLyybhK3rRLCzctC5zvv3eVYT2x54WsCw7PSul5YNoyrx2aF473QwsJg8="
+    - secure: "rtmMVJ6xIj7FuqzmCEXxTjMP1UaKGX7AjOJru6w+szhEjH5qJWCjMZzzlaDZfaHkk4haawMGW4iYQT/kf3WBUMnn21zM15oJvgn2MJ6s3nmKZWe9il0aIAwzKk09ggvx/tcSoiu0s8ATAoG/BLrHi3roTVevyMXVVbGBwCCvWZDCX2kxhYEok76+I08/WuqZw+3NwgrdqB0E5mMrnQKT9HdbCGYAJPcTH7HSEjyhudrYJqQcKToWat3q1S0/jzhkwUDM00T5LEkgTM49hdPkVyQrGLIQo0bP073goHB9uIOoJyczlVSUA8d/mlagw7yjHlOTSHSixa7audfh4Q1GDbVEEQZ8bdyPg4xyV8YTrrdm/yZ60lADdJEyiyMeZHoh/CBz5YpbEv1bpLJiLbW/JEWaqgV8AQtC5hMtOunV30Y/xnHpqxiZUATrFzCt/bZA6YyvSkET2uOhm5TPehWqYEZ/mgPZg7MtZMsN+QG3seqzn2copnHylSnOmJtFuhROtL9iKFhJNIzFBJ2nvCrun1HPAj25dK1yRj2J3WGcyKFWHJL7n/CnJl+GSh1E7YtxvExEWbCNKYcoeUWkwDupXafRRNMak+IWY2YhLcnnohOJu44lWW9lfr1Wpi3S3pRi6OggMnQWlF+NaGNQURxwsJ1GQQkxdP74OMI7O/DcwHo="
