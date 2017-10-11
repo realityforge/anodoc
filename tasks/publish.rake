@@ -3,9 +3,8 @@ require 'mcrt'
 desc 'Publish release on maven central'
 task 'publish_to_maven_central' do
   project = Buildr.projects[0].root_project
-  username = ENV['MAVEN_CENTRAL_USERNAME'] || (raise "Unable to locate environment variable with name 'MAVEN_CENTRAL_USERNAME'")
   password = ENV['MAVEN_CENTRAL_PASSWORD'] || (raise "Unable to locate environment variable with name 'MAVEN_CENTRAL_PASSWORD'")
-  MavenCentralPublishTool.buildr_release(project, 'org.realityforge', username, password)
+  MavenCentralPublishTool.buildr_release(project, 'org.realityforge', 'realityforge', password)
 end
 
 desc 'Publish release to maven central iff current HEAD is a tag'
